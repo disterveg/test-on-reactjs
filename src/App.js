@@ -1,23 +1,12 @@
 import React from 'react';
-import './App.css';
+import Layout from './hoc/Layout/Layout';
+import Quiz from './containers/Quiz/Quiz';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Quiz />
+    </Layout>
   );
 }
 
