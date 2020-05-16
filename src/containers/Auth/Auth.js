@@ -40,7 +40,6 @@ class Auth extends Component {
         this.loginHandler = this.loginHandler.bind(this);
         this.registerHandler = this.registerHandler.bind(this);
         this.onChangeHandler = this.onChangeHandler.bind(this);
-        this.validateControl = this.validateControl.bind(this);
     }
 
     SubmitHandler(event) {
@@ -97,7 +96,6 @@ class Auth extends Component {
             formControls, 
             isFormValid
         });
-        console.log(!this.state.isFormValid);
     }
 
     renderInputs() {
