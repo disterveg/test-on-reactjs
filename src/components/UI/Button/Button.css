@@ -19,12 +19,6 @@
     box-shadow: inset 2px 2px 1px rgba(0, 0, 0, .3);
 }
 
-.Button.disabled {
-    background: #ccc;
-    color: #000;
-    cursor: not-allowed;
-}
-
 .Button.error {
     background: rgba(240, 87, 108, 1);
 }
@@ -36,4 +30,10 @@
 .Button.primary {
     background: #2884f6;
     color: #fff;
+}
+
+.Button.disabled {
+    background: #ccc;
+    color: #000;
+    cursor: not-allowed;
 }

@@ -7,6 +7,10 @@ const Button = props => {
         props.type
     ];
 
+    if(props.disabled) {
+        classes.push('disabled');
+    }
+
     return (
         <button
             onClick={props.onClick}

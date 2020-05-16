@@ -2,7 +2,6 @@ import React from 'react';
 import './Input.css';
 
 function isInvalid({valid, touched, shouldValidate}) {
-    console.log(valid, touched, shouldValidate);
     return !valid && shouldValidate && touched;
 };
 

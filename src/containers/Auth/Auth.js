@@ -7,7 +7,8 @@ class Auth extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fomrControls: {
+            isFormValid: false,
+            formControls: {
                 email: {
                     value: '',
                     type: 'email',
@@ -78,23 +79,30 @@ class Auth extends Component {
     }
 
     onChangeHandler(event, controleName) {
-        const fomrControls = {...this.state.fomrControls};
-        const control = {...fomrControls[controleName]};
+        const formControls = {...this.state.formControls};
+        const control = {...formControls[controleName]};
 
         control.value = event.target.value;
         control.touched = true;
         control.valid = this.validateControl(control.value, control.validation);
 
-        fomrControls[controleName] = control;
+        formControls[controleName] = control;
+
+        let isFormValid = true;
+        Object.keys(formControls).forEach(name => {
+            isFormValid = formControls[name].valid && isFormValid;
+        });
 
         this.setState({
-            fomrControls
+            formControls, 
+            isFormValid
         });
+        console.log(!this.state.isFormValid);
     }
 
     renderInputs() {
-        return Object.keys(this.state.fomrControls).map((controleName, index) => {
-            const control = this.state.fomrControls[controleName];
+        return Object.keys(this.state.formControls).map((controleName, index) => {
+            const control = this.state.formControls[controleName];
             return (
                 <Input 
                     key={index}
@@ -122,6 +130,7 @@ class Auth extends Component {
                         <Button
                             type="success"
                             onClick={this.loginHandler}
+                            disabled={!this.state.isFormValid}
                         >
                             Войти
                         </Button>
@@ -129,6 +138,7 @@ class Auth extends Component {
                         <Button
                             type="primary"
                             onClick={this.registerHandler}
+                            disabled={!this.state.isFormValid}
                         >
                             Зарегистрироваться
                         </Button>
