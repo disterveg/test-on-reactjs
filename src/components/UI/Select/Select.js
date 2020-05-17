@@ -24,6 +24,8 @@ class Select extends Component {
     }
 
     onClickItemHandler(event) {
+        this.props.onChange(event);
+        
         this.setState({
             value : event.target.dataset.value,
             label: event.target.innerHTML,
@@ -56,41 +58,41 @@ class Select extends Component {
 
         return (
             <div className={classes.join(' ')}>
-                    <div className="Select__container" >
-                        <div className="Select__selection" onClick={this.onClickSelectHandler}>
-                            <span className="Select__label">
-                                {this.props.items.map((item) => {
-                                    if(this.state.value === item.ID) {
-                                        return item.NAME;
-                                    }
-                                })}
-                                {this.state.value === '' ? this.state.label : null} 
-                            </span>
-                        </div>
-                        <ul className="Select__dropdown-wrapper">
-                            {this.props.view === 'has-search'
-                            ? 
-                            <Input 
-                                value={this.state.term}
-                                searchIcon="true"
-                                onChange={event => this.onChangeHandler(event)}
-                            />
-                            : null}
-                            {this.searchItems().map((item, index) => {
-                                return (
-                                    <li
-                                        key={index}
-                                        className={item.ID !== this.state.value ? 'Select__item' : 'Select__item selected'}
-                                        data-value={item.ID}
-                                        onClick={this.onClickItemHandler}
-                                    >
-                                        {item.NAME}
-                                    </li>
-                                );
+                <div className="Select__container" >
+                    <div className="Select__selection" onClick={this.onClickSelectHandler}>
+                        <span className="Select__label">
+                            {this.props.items.map((item) => {
+                                if(this.state.value === item.ID) {
+                                    return item.NAME;
+                                }
                             })}
-                            {this.searchItems().length === 0 ? <li className="Select__item">{this.props.notFoundmMsg}</li> : null}
-                        </ul>
+                            {this.state.value === '' ? this.state.label : null} 
+                        </span>
                     </div>
+                    <ul className="Select__dropdown-wrapper">
+                        {this.props.view === 'has-search'
+                        ? 
+                        <Input 
+                            value={this.state.term}
+                            searchIcon="true"
+                            onChange={event => this.onChangeHandler(event)}
+                        />
+                        : null}
+                        {this.searchItems().map((item, index) => {
+                            return (
+                                <li
+                                    key={index}
+                                    className={item.ID !== this.state.value ? 'Select__item' : 'Select__item selected'}
+                                    data-value={item.ID}
+                                    onClick={this.onClickItemHandler}
+                                >
+                                    {item.NAME}
+                                </li>
+                            );
+                        })}
+                        {this.searchItems().length === 0 ? <li className="Select__item">{this.props.notFoundmMsg}</li> : null}
+                    </ul>
+                </div>
             </div>
         );
     }
