@@ -15,6 +15,7 @@ class Select extends Component {
 
         this.onClickSelectHandler = this.onClickSelectHandler.bind(this);
         this.onClickItemHandler = this.onClickItemHandler.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     onClickSelectHandler() {
@@ -49,6 +50,15 @@ class Select extends Component {
         });
     }
 
+    reset() {
+        this.setState({
+            isOpen: false,
+            label: props.label,
+            value: props.value,
+            term: ''
+        });
+    }
+
     render() {
         const classes = ['Select'];
 
@@ -58,7 +68,7 @@ class Select extends Component {
 
         return (
             <div className={classes.join(' ')}>
-                <div className="Select__container" >
+                <div className="Select__container">
                     <div className="Select__selection" onClick={this.onClickSelectHandler}>
                         <span className="Select__label">
                             {this.props.items.map((item) => {
