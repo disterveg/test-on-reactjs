@@ -1,5 +1,5 @@
 .Select {
-    max-width: 450px;
+    /*max-width: 450px;*/
     margin-bottom: 15px;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .Select__label {
-    max-width: 450px;
+    /*max-width: 450px;*/
     padding: 0 0 0 5px;
     line-height: 31px;
     overflow: hidden;

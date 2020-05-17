@@ -3,11 +3,36 @@ import './QuizCreator.css';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import Select from '../../components/UI/Select/Select';
+import {createControl} from '../../form/formFramework';
+
+function createOptionControl(number) {
+    return createControl({
+        label: `Вариант${number}`,
+        errorMessage: 'Значение не может быть пустым',
+        id: number
+    }, {required: true});
+}
+
+function createFormControls() {
+    return {
+        question: createControl({
+            label: 'Введите вопрос',
+            errorMessage: 'Вопрос не может быть пустым'
+        }, {required: true}),
+        option1: createOptionControl(1),
+        option2: createOptionControl(2),
+        option3: createOptionControl(3),
+        option4: createOptionControl(4),
+    }
+}
 
 class QuizCreator extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            quiz: [],
+            formControls: createFormControls()
+        };
 
         this.submitHandler = this.submitHandler.bind(this);
     };
@@ -24,6 +49,29 @@ class QuizCreator extends Component {
         
     }
 
+    changeHandler() {}
+
+    renderControls() {
+        return Object.keys(this.state.formControls).map((controlName, index) => {
+            const control = this.state.formControls[controlName];
+
+            return (
+                <React.Fragment key={index}>
+                <Input
+                    label={control.label}
+                    value={control.value}
+                    valid={control.valid}
+                    shouldValidate={!!control.validation}
+                    touched={control.touched}
+                    errorMessage={control.errorMessage}
+                    onChange={event => this.changeHandler(event.target.value, controlName)}
+                />
+                {index === 0 ? <hr /> : null}
+                </React.Fragment>
+            );
+        });
+    }
+
     render() {
         return (
             <div className="QuizCreator">
@@ -31,6 +79,8 @@ class QuizCreator extends Component {
                     <h1>Создание теста</h1>
 
                     <form onSubmit={this.submitHandler}>
+                        {this.renderControls()}
+
                         <Select
                             key={'1'}
                             value=""
