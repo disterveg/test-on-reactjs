@@ -19,6 +19,12 @@ const Input = props => {
     return (
         <div className={classses.join(' ')}>
             <label htmlFor={htmlFor}>{props.label}</label>
+            {
+                props.searchIcon 
+                ? <span className="zoom-icon"><span className="zoom-inner"></span></span>
+                : null
+            }
+            
             <input 
                 type={inputType}
                 id={htmlFor}

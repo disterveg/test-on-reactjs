@@ -1,5 +1,6 @@
 .Input {
     margin-bottom: 15px;
+    position: relative;
 }
 
 .Input label {
@@ -29,3 +30,30 @@
 .Input.invalid label {
     color: #f01f30;
 }
+
+.Input .zoom-icon {
+    display: inline-block;
+    position: absolute;
+    top: 9px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    border: 2px solid #000;
+}
+  
+.Input .zoom-inner {
+    width: 6px;
+    height: 3px;
+    display: block;
+    background: #000;
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    transform: rotate(45deg);
+}
+
+.Input .zoom-icon + input {
+    padding-left: 28px;
+}
+
