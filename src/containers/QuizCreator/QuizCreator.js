@@ -3,11 +3,12 @@ import './QuizCreator.css';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import Select from '../../components/UI/Select/Select';
-import {createControl} from '../../form/formFramework';
+import {createControl, validate, validateForm} from '../../form/formFramework';
 
 function createOptionControl(number) {
     return createControl({
         label: `Вариант${number}`,
+        isFormValid: false,
         errorMessage: 'Значение не может быть пустым',
         id: number
     }, {required: true});
@@ -37,21 +38,35 @@ class QuizCreator extends Component {
 
         this.submitHandler = this.submitHandler.bind(this);
         this.selectChangeHandler = this.selectChangeHandler.bind(this);
+        this.changeHandler = this.changeHandler.bind(this);
     };
 
     submitHandler(event) {
         event.preventDefault();
     };
 
-    onAddQuestionHandler() {
-
+    onAddQuestionHandler(event) {
+        event.preventDefault();
     }
 
     createQuizHandler() {
         
     }
 
-    changeHandler() {}
+    changeHandler(value, controleName) {
+        const formControls = {...this.state.formControls};
+        const control = {...formControls[controleName]};
+
+        control.touched = true;
+        control.value = value;
+        control.valid = validate(control.value, control.validation);
+        formControls[controleName] = control;
+
+        this.setState({
+            formControls,
+            isFormValid: validateForm(formControls)
+        });
+    }
 
     renderControls() {
         return Object.keys(this.state.formControls).map((controlName, index) => {
@@ -103,6 +118,7 @@ class QuizCreator extends Component {
                         <Button
                             type="primary"
                             onClick={this.onAddQuestionHandler}
+                            disabled={!this.state.isFormValid}
                         >
                             Добавить вопрос
                         </Button>
@@ -110,6 +126,7 @@ class QuizCreator extends Component {
                         <Button
                             type="success"
                             onClick={this.createQuizHandler}
+                            disabled={this.state.quiz.length === 0}
                         >
                             Создать тест
                         </Button>
