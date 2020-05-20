@@ -121,7 +121,8 @@ class QuizCreator extends Component {
 
     selectChangeHandler(event) {
         this.setState({
-            rightAnswerId: event.target.dataset.value
+            rightAnswerId: event.target.dataset.value,
+            label: event.target.innerHTML
         });
     }
 

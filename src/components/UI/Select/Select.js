@@ -8,14 +8,11 @@ class Select extends Component {
         super(props);
         this.state = {
             isOpen: false,
-            label: props.label,
-            value: props.value,
             term: ''
         }
 
         this.onClickSelectHandler = this.onClickSelectHandler.bind(this);
         this.onClickItemHandler = this.onClickItemHandler.bind(this);
-        this.reset = this.reset.bind(this);
     }
 
     onClickSelectHandler() {
@@ -50,14 +47,14 @@ class Select extends Component {
         });
     }
 
-    reset() {
-        this.setState({
-            isOpen: false,
-            label: props.label,
-            value: props.value,
-            term: ''
-        });
+    showNameById() {
+        return this.props.items.map((item) => {
+            if(this.props.value === item.ID) {
+                return item.NAME;
+            }
+        })
     }
+
 
     render() {
         const classes = ['Select'];
@@ -71,12 +68,7 @@ class Select extends Component {
                 <div className="Select__container">
                     <div className="Select__selection" onClick={this.onClickSelectHandler}>
                         <span className="Select__label">
-                            {this.props.items.map((item) => {
-                                if(this.state.value === item.ID) {
-                                    return item.NAME;
-                                }
-                            })}
-                            {this.state.value === '' ? this.state.label : null} 
+                            {this.props.value === '' ? this.props.label : this.showNameById()} 
                         </span>
                     </div>
                     <ul className="Select__dropdown-wrapper">
@@ -92,7 +84,7 @@ class Select extends Component {
                             return (
                                 <li
                                     key={index}
-                                    className={item.ID !== this.state.value ? 'Select__item' : 'Select__item selected'}
+                                    className={item.ID !== this.props.value ? 'Select__item' : 'Select__item selected'}
                                     data-value={item.ID}
                                     onClick={this.onClickItemHandler}
                                 >
