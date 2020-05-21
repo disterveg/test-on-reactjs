@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Select.css';
 import Input from '../Input/Input';
+import Scrollbar from "react-scrollbars-custom";
 
 class Select extends Component {
 
@@ -72,6 +73,7 @@ class Select extends Component {
                         </span>
                     </div>
                     <ul className="Select__dropdown-wrapper">
+                    <Scrollbar>
                         {this.props.view === 'has-search'
                         ? 
                         <Input 
@@ -93,6 +95,7 @@ class Select extends Component {
                             );
                         })}
                         {this.searchItems().length === 0 ? <li className="Select__item">{this.props.notFoundmMsg}</li> : null}
+                        </Scrollbar>
                     </ul>
                 </div>
             </div>

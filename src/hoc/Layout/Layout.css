@@ -9,3 +9,8 @@
     flex-direction: column;
     flex-grow: 1; /*чтобы main занимал всю доступную высоту*/
 }
+
+::-webkit-scrollbar {
+    min-width: 1px;
+    min-height: 1px;
+  }

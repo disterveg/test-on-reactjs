@@ -135,3 +135,7 @@
 .Select__dropdown-wrapper .Input .zoom-inner {
     background: #888;
 }
+
+.ScrollbarsCustom-Track.ScrollbarsCustom-TrackY {
+    background: transparent !important;
+}
