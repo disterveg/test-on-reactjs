@@ -3,6 +3,10 @@ import './Select.css';
 import Input from '../Input/Input';
 import Scrollbar from "react-scrollbars-custom";
 
+function isInvalid({valid, touched, shouldValidate}) {
+    return !valid && shouldValidate && touched;
+};
+
 class Select extends Component {
 
     constructor(props) {
@@ -72,6 +76,7 @@ class Select extends Component {
                             {this.props.value === '' ? this.props.label : this.showNameById()} 
                         </span>
                     </div>
+                    {console.log(this.props)}
                     <ul className="Select__dropdown-wrapper">
                     <Scrollbar>
                         {this.props.view === 'has-search'
@@ -98,6 +103,11 @@ class Select extends Component {
                         </Scrollbar>
                     </ul>
                 </div>
+                {
+                isInvalid(this.props) 
+                ? <span>{this.props.errorMessage || 'Неккоректное значение'}</span>
+                : null
+                }
             </div>
         );
     }

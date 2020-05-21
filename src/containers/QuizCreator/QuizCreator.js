@@ -24,6 +24,9 @@ function createFormControls() {
         option2: createOptionControl(2),
         option3: createOptionControl(3),
         option4: createOptionControl(4),
+        answer: createControl({
+            errorMessage: 'Выберите ответ'
+        }, {required: true}),
     }
 }
 
@@ -99,7 +102,7 @@ class QuizCreator extends Component {
     }
 
     renderControls() {
-        return Object.keys(this.state.formControls).map((controlName, index) => {
+        return Object.keys(this.state.formControls).filter(x => x !== 'answer').map((controlName, index) => {
             const control = this.state.formControls[controlName];
 
             return (
@@ -119,8 +122,17 @@ class QuizCreator extends Component {
         });
     }
 
-    selectChangeHandler(event) {
+    selectChangeHandler(event, controleName) {
+        const formControls = {...this.state.formControls};
+        const control = {...formControls[controleName]};
+
+        control.value = event.target.dataset.value;
+        control.valid = validate(control.value, control.validation);
+        formControls[controleName] = control;
+
         this.setState({
+            formControls,
+            isFormValid: validateForm(formControls),
             rightAnswerId: event.target.dataset.value,
             label: event.target.innerHTML
         });
@@ -139,7 +151,10 @@ class QuizCreator extends Component {
                             key={'1'}
                             value={this.state.rightAnswerId}
                             label="Выберите правильный ответ"
-                            onChange={event => this.selectChangeHandler(event)}
+                            valid={this.state.formControls['answer'].valid}
+                            shouldValidate={!!this.state.formControls['answer'].validation}
+                            errorMessage={this.state.formControls['answer'].errorMessage}
+                            onChange={event => this.selectChangeHandler(event, 'answer')}
                             items={[
                                 {ID: "1", NAME: "1"},
                                 {ID: "2", NAME: "2"},
