@@ -20,7 +20,9 @@ class Select extends Component {
         this.onClickItemHandler = this.onClickItemHandler.bind(this);
     }
 
-    onClickSelectHandler() {
+    onClickSelectHandler(event) {
+        this.props.onChange(event);
+
         this.setState({
             isOpen : !this.state.isOpen
         });
@@ -105,7 +107,7 @@ class Select extends Component {
                 </div>
                 {
                 isInvalid(this.props) 
-                ? <span>{this.props.errorMessage || 'Неккоректное значение'}</span>
+                ? <span className="Select__label--error">{this.props.errorMessage || 'Неккоректное значение'}</span>
                 : null
                 }
             </div>

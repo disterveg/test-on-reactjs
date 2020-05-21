@@ -139,3 +139,9 @@
 .ScrollbarsCustom-Track.ScrollbarsCustom-TrackY {
     background: transparent !important;
 }
+
+.Select__label--error {
+    color: #f01f30;
+    font-size: 12px;
+    font-weight: bold;
+}

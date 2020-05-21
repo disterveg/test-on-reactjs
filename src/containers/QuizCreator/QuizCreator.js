@@ -123,19 +123,34 @@ class QuizCreator extends Component {
     }
 
     selectChangeHandler(event, controleName) {
-        const formControls = {...this.state.formControls};
-        const control = {...formControls[controleName]};
+        if(event.target.className === 'Select__item') {
+            const formControls = {...this.state.formControls};
+            const control = {...formControls[controleName]};
 
-        control.value = event.target.dataset.value;
-        control.valid = validate(control.value, control.validation);
-        formControls[controleName] = control;
+            control.touched = true;
+            control.value = event.target.dataset.value;
+            control.valid = validate(control.value, control.validation);
+            formControls[controleName] = control;
 
-        this.setState({
-            formControls,
-            isFormValid: validateForm(formControls),
-            rightAnswerId: event.target.dataset.value,
-            label: event.target.innerHTML
-        });
+            this.setState({
+                formControls,
+                isFormValid: validateForm(formControls),
+                rightAnswerId: event.target.dataset.value,
+                label: event.target.innerHTML
+            });
+        } else {
+            const formControls = {...this.state.formControls};
+            const control = {...formControls[controleName]};
+
+            control.touched = true;
+            //control.valid = validate(control.value, control.validation);
+            formControls[controleName] = control;
+
+            this.setState({
+                formControls,
+                isFormValid: validateForm(formControls),
+            });
+        }
     }
 
     render() {
@@ -153,6 +168,7 @@ class QuizCreator extends Component {
                             label="Выберите правильный ответ"
                             valid={this.state.formControls['answer'].valid}
                             shouldValidate={!!this.state.formControls['answer'].validation}
+                            touched={this.state.formControls['answer'].touched}
                             errorMessage={this.state.formControls['answer'].errorMessage}
                             onChange={event => this.selectChangeHandler(event, 'answer')}
                             items={[
