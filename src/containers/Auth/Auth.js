@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './Auth.css';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
+import axios from 'axios';
 
 class Auth extends Component {
     constructor(props) {
@@ -46,12 +47,34 @@ class Auth extends Component {
         event.preventDefault();
     }
 
-    loginHandler() {
+    async loginHandler() {
+        const authData = {
+            email: this.state.formControls.email.value,
+            password: this.state.formControls.password.value,
+            returnSecureToken: true
+        };
 
+        try {
+            const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDeSimt1B27uHjsYkgc1cYvYBsOBa-0MbU', authData);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
-    registerHandler() {
+    async registerHandler() {
+        const authData = {
+            email: this.state.formControls.email.value,
+            password: this.state.formControls.password.value,
+            returnSecureToken: true
+        };
 
+        try {
+            const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDeSimt1B27uHjsYkgc1cYvYBsOBa-0MbU', authData);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     validateControl(value, validation) {

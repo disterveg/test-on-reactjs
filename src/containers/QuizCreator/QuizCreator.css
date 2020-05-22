@@ -4,7 +4,7 @@
     padding-top: 50px;
     flex: 1;
     width: 100%;
-    background-color: aliceblue;
+    background: linear-gradient(90deg, #5041b2 0%, #7969e6 100%);
 }
 
 .QuizCreator > div {
