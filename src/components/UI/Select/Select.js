@@ -78,7 +78,6 @@ class Select extends Component {
                             {this.props.value === '' ? this.props.label : this.showNameById()} 
                         </span>
                     </div>
-                    {console.log(this.props)}
                     <ul className="Select__dropdown-wrapper">
                     <Scrollbar>
                         {this.props.view === 'has-search'

@@ -6,5 +6,12 @@
                 "last 5 versions"
             ]
         }]
-    ]
+    ],
+    "plugins": [
+        ["@babel/plugin-transform-runtime",
+          {
+            "regenerator": true
+          }
+        ]
+      ]
 }
