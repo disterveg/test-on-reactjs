@@ -53,7 +53,8 @@ export function finishQuiz() {
 
 export function quizNextQuestion(number) {
     return {
-        type: QUIZ_NEXT_QUESTION
+        type: QUIZ_NEXT_QUESTION,
+        number
     };
 }
 

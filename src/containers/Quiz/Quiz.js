@@ -21,6 +21,7 @@ class Quiz extends Component {
     }
 
     render() {
+        //debugger;
         return (
             <div className="Quiz">
                 <div className="QuizWrapper">
