@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux'
-import quizReducer from './containers/QuizList/reducer';
+import quizesReducer from './containers/QuizList/reducer';
+import quizeReducer from './containers/Quiz/reducer';
 
 export default function createReducer(injectedReducers = {}) {
     const rootReducer = combineReducers({
-        quiz: quizReducer,
+        quizes: quizesReducer, 
+        quiz: quizeReducer,
         ...injectedReducers,
     });
 

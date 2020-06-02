@@ -2,11 +2,11 @@ import {FETCH_QUIZES_ERROR, FETCH_QUIZES_START, FETCH_QUIZES_SUCCESS} from './co
 
 const initialState = {
   quizes: [],
-  loading: false,
+  loading: true,
   error: null
 }
 
-export default function quizReducer(state = initialState, action) {
+export default function quizesReducer(state = initialState, action) {
   switch (action.type) {
     case FETCH_QUIZES_START:
       return {

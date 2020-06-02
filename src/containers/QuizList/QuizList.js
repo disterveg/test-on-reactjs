@@ -12,7 +12,6 @@ class QuizList extends Component {
     };
 
     renderQuizes() {
-        console.log(this.props);
         return this.props.quizes.map(quiz => {
             return (
                 <li key={quiz.id}>
@@ -38,7 +37,7 @@ class QuizList extends Component {
 
                     <ul>
                         {
-                            this.props.loading && this.props.quizes.length != 0
+                            this.props.loading || !this.props.quizes.length != 0
                                 ? <Loader />
                                 : this.renderQuizes()
                         }
@@ -49,12 +48,10 @@ class QuizList extends Component {
     }
 }
 
-
-  
 function mapStateToProps(state) {
     return {
-        quizes: state.quiz.quizes,
-        loading: state.quiz.loading
+        quizes: state.quizes.quizes,
+        loading: state.quizes.loading
     }
 };
   
