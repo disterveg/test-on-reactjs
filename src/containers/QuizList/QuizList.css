@@ -27,5 +27,5 @@
 }
 
 .QuizList li a:hover {
-    color: #363f54;
+    opacity: .7;
 }
