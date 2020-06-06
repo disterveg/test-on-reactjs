@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import './Auth.css';
 import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import auth from './actions';
 
 class Auth extends Component {
     constructor(props) {
@@ -47,34 +49,20 @@ class Auth extends Component {
         event.preventDefault();
     }
 
-    async loginHandler() {
-        const authData = {
-            email: this.state.formControls.email.value,
-            password: this.state.formControls.password.value,
-            returnSecureToken: true
-        };
-
-        try {
-            const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDeSimt1B27uHjsYkgc1cYvYBsOBa-0MbU', authData);
-            console.log(response);
-        } catch (error) {
-            console.log(error);
-        }
+    loginHandler() {
+        this.props.auth(
+            this.state.formControls.email.value,
+            this.state.formControls.password.value,
+            true
+        );
     }
 
-    async registerHandler() {
-        const authData = {
-            email: this.state.formControls.email.value,
-            password: this.state.formControls.password.value,
-            returnSecureToken: true
-        };
-
-        try {
-            const response = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDeSimt1B27uHjsYkgc1cYvYBsOBa-0MbU', authData);
-            console.log(response);
-        } catch (error) {
-            console.log(error);
-        }
+    registerHandler() {
+        this.props.auth(
+            this.state.formControls.email.value,
+            this.state.formControls.password.value,
+            false
+        );
     }
 
     validateControl(value, validation) {
@@ -170,4 +158,17 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+function mapDispatchToProps(dispatch) {
+    return {
+        auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
+    };
+};
+  
+const withConnect = connect(
+    null,
+    mapDispatchToProps,
+);
+
+export default compose(
+    withConnect
+)(Auth);
