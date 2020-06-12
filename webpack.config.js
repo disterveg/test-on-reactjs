@@ -4,6 +4,18 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
+const isDev = !process.env.NODE_ENV === 'production'
+
+const jsLoaders = () => {
+  const loaders = [MiniCssExtractPlugin.loader, 'css-loader'];
+
+  if (isDev) {
+    loaders.push('eslint-loader')
+  }
+
+  return loaders;
+}
+
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -38,7 +50,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        use: jsLoaders()
       },
       { test: /\.js$/, 
         exclude: /node_modules/, 
