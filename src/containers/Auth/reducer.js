@@ -1,4 +1,5 @@
-import { AUTH_SUCCESS, AUTH_LOGOUT } from "./constants";
+import { AUTH_SUCCESS } from "./constants";
+import { AUTH_LOGOUT } from '../../components/Logout/constants';
 
 const initialState = {
     token: null
